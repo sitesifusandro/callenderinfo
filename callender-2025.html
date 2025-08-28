@@ -559,7 +559,7 @@ font-size: 14px;
     "2025-10-05": "Internal WingTsun 10h-13h Peer :: meer info contact sifu Sandro #rood",
     "2025-10-12": "Internal WingTsun 10h-13h Peer :: meer info contact sifu Sandro #rood",
     "2025-10-19": "Internal WingTsun 10h-13h Peer :: meer info contact sifu Sandro #rood",
-    "2025-08-28": "Internal WingTsun 10h-13h Peer :: meer info contact sifu Sandro #blauw",
+    "2025-08-28": "Internal WingTsun 10h-13h Peer :: meer info contact sifu Sandro #geel",
 
 
     "2025-08-05": "magichands workshop 20h-22h Peer :: meer info contact sifu Sandro #rood",
@@ -693,7 +693,7 @@ function renderCalendar() {
       html += `<td class="${classes.join(' ')}" ${isToday ? `data-day="${day}"` : ""}>
                 <div style="display: flex; flex-direction: column; align-items: center;">
                   <div class="day-cell">${day}</div>
-                  ${dotColor ? `<div style="width: 18px; height: 5px; border-radius: 50%; background-color: ${dotColor};margin-top: -4px; top: 6px; position: relative;"></div>` : ""}
+                  ${dotColor ? `<div style="width: 18px; height: 5px; border-radius: 50%; background-color: ${dotColor};margin-top: 3;"></div>` : ""}
                 </div>
               </td>`;
 
@@ -894,6 +894,7 @@ document.getElementById("month").textContent = `${monthNames[today.getMonth()]} 
 </section>
 </body>
 </html>
+
 
 
 
