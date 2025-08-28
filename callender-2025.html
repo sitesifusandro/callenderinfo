@@ -438,7 +438,7 @@ font-size: 14px;
   }
 
  .container, .legend {
-    width:  calc(100vw - 10px);
+    width:  calc(90vw - 26px);
     aspect-ratio: 4 / 3; /* zorgt dat verhouding behouden blijft */
     zoom: 0.98;
   }
@@ -829,7 +829,7 @@ function updateTodayEvent() {
   const todayEventDiv = document.getElementById("today-event");
 
   let eventText = "Geen stage";
-  let bgColor = "#323131"; // default
+  let bgColor = "#424040"; // default
   let textColor = "white";
 
   if (notesData[dateStr]) {
@@ -893,6 +893,7 @@ document.getElementById("month").textContent = `${monthNames[today.getMonth()]} 
 </section>
 </body>
 </html>
+
 
 
 
