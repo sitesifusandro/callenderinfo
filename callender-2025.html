@@ -405,7 +405,7 @@ font-size: 14px;
 
   .container {
     /* Default scaling */
-   width:95vw;
+   width: calc(100vw - 10px);
   }
 
 }@media (max-width: 700px) {
@@ -418,7 +418,7 @@ font-size: 14px;
   .container {
     /* Default scaling */
       width: calc(100vw - 10px);
-transform: scale(1.1);
+
   }
 }
 
@@ -893,6 +893,7 @@ document.getElementById("month").textContent = `${monthNames[today.getMonth()]} 
 </section>
 </body>
 </html>
+
 
 
 
