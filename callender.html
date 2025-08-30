@@ -18,14 +18,16 @@
 
  .container {
   width: 600px;
-  max-width: 95vw;
+  max-width: calc(100vw - 5px);
   perspective: 1000px;
   position: relative;
 height:356px;
-zoom:1.2;
+   max-height: calc(100vh - 5px);
+margin: 0 auto;
 margin-top:35px;
 border: 2px solid white;
 border-radius: 10px;
+    box-sizing: border-box;
 }
 
 .card {
@@ -865,6 +867,7 @@ document.getElementById("month").textContent = `${monthNames[today.getMonth()]} 
 </section>
 </body>
 </html>
+
 
 
 
