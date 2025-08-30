@@ -8,6 +8,9 @@
 
 
 <style>
+    html {
+    height: 100%;
+  }
   body {
     margin: 0;
     height: 100%;
@@ -36,6 +39,7 @@ border-radius: 10px;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 1s ease;
+  transform: translateZ(0);
 }
 
 .flipped {
@@ -49,6 +53,7 @@ border-radius: 10px;
   height: 100%;
   backface-visibility: hidden;
   transform-style: preserve-3d;
+  transform: translateZ(0);
   top: 0;
   left: 0;
 }
@@ -867,6 +872,7 @@ document.getElementById("month").textContent = `${monthNames[today.getMonth()]} 
 </section>
 </body>
 </html>
+
 
 
 
