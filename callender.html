@@ -850,11 +850,11 @@ function updateTodayEvent() {
       Vandaag
     </div>
 <div style="font-size: 14px; font-weight: 600; margin-top: 165px; background-color:#434141; width: 125px; height:176px;right: 20px;padding-top: 0px;position: relative;border-radius: 5px;z-index: -1;margin-bottom: -75px; text-align:center;
- color: ${notesData[dateStr]?.toLowerCase().includes('#wit') ? '#232227' : '#fff'};"></br>
+ color: ${notesData[dateStr]?.toLowerCase().includes('#wit') ? '#232227' : '#fff'};">
     ${eventText}
  
 
-  <div style="width: 80px; height: 10px; background-color: ${bgColor}; border-radius: 50%; position: relative; margin: auto; bottom: -25px;"></div> </div>
+  <div style="width: 80px; height: 10px; background-color: ${bgColor}; border-radius: 50%; position: absolute; left: 20px;"></div> </div>
 `;
  // todayEventDiv.style.backgroundColor = bgColor;
  // todayEventDiv.style.color = textColor;
@@ -884,6 +884,7 @@ document.getElementById("month").textContent = `${monthNames[today.getMonth()]} 
 </section>
 </body>
 </html>
+
 
 
 
