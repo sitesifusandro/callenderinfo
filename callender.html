@@ -188,12 +188,11 @@ color: #Efff;
   justify-content: center;
 }
 .date {
-  width: 24%;
+  width: 140px;
   height: 100%;
   background-color: #7c7b7b;
   border-radius: 0 6px 6px 0;
   text-align: right;
-  padding: 10px 30px;
   box-sizing: border-box;
 }
 
@@ -208,6 +207,8 @@ color: #Efff;
   color: #FFF;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
+  display: flex;
+  justify-content: center;
 }
 
 #day {
@@ -225,6 +226,7 @@ color: #Efff;
   color: #000;
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
+  margin-right: 5px;
 }
 
 .controls {
@@ -402,16 +404,13 @@ font-size: 14px;
   color: #232227;
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
-  white-space: pre-wrap;
-  padding: 0 10px 5px 8px;
-  width: 120px;
-
-  position: relative;
-  bottom: 135px;
+  position: absolute;
   border-radius: 5px;
-  right: 7px;
+  right: 13px;
   display: flex;
   z-index: 2;
+  height: 200px;
+  align-items: center;
 }
 
 
@@ -895,6 +894,7 @@ document.getElementById("month").textContent = `${monthNames[today.getMonth()]} 
 </section>
 </body>
 </html>
+
 
 
 
