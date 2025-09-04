@@ -188,7 +188,7 @@ color: #Efff;
   justify-content: center;
 }
 .date {
-  width: 140px;
+  width: 24%;
   height: 100%;
   background-color: #7c7b7b;
   border-radius: 0 6px 6px 0;
@@ -694,7 +694,7 @@ function renderCalendar() {
       html += `<td class="${classes.join(' ')}" ${isToday ? `data-day="${day}"` : ""}>
                 <div style="display: flex; flex-direction: column; align-items: center;">
                   <div class="day-cell">${day}</div>
-                  ${dotColor ? `<div style="width: 18px; height: 5px; border-radius: 50%; background-color: ${dotColor}; margin-top: 3px;"></div>` : ""}
+                  ${dotColor ? `<div style="width: 18px; height: 5px; border-radius: 50%; background-color: ${dotColor}; position: absolute; bottom: 0;"></div>` : ""}
                 </div>
               </td>`;
 
@@ -895,6 +895,7 @@ document.getElementById("month").textContent = `${monthNames[today.getMonth()]} 
 </section>
 </body>
 </html>
+
 
 
 
