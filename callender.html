@@ -23,8 +23,9 @@
   width: 600px;
   max-width: calc(100vw - 5px);
   perspective: 1000px;
-     -webkit-perspective: 1000;
+     -webkit-perspective: 1000px;
   perspective-origin: center;
+  -webkit-perspective-origin: center; 
   position: relative;
 height:356px;
    max-height: calc(100vh - 5px);
@@ -41,7 +42,10 @@ border-radius: 10px;
   position: relative;
   transform-style: preserve-3d;
   -webkit-transform-style:preserve-3d;
-  transition: transform 1s ease;
+  transition: transform 0.9s ease;
+    transform: translateZ(0);
+  transform: rotateY(0deg); 
+  -webkit-transform: rotateY(0deg);
     transform-origin: center center;
     will-change: transform;
     display: block;
@@ -892,6 +896,7 @@ document.getElementById("month").textContent = `${monthNames[today.getMonth()]} 
 </section>
 </body>
 </html>
+
 
 
 
