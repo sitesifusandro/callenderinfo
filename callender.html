@@ -891,11 +891,20 @@ document.addEventListener("DOMContentLoaded", () => {
 document.getElementById("month").textContent = `${monthNames[today.getMonth()]} ${today.getFullYear()}`;
 
   });
+
+  const card = document.querySelector('.card');
+card.addEventListener('click', function() {
+  // Voeg een korte vertraging toe om het animatie-effect te forceren
+  setTimeout(function() {
+    card.classList.toggle('flipped');
+  }, 10);
+});
 </script>
 
 </section>
 </body>
 </html>
+
 
 
 
