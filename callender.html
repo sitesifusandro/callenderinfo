@@ -656,10 +656,6 @@ function nextMonth() {
   renderCalendar();
 }
 
-
-
-
-
 function renderCalendar() {
   const firstDay = new Date(year, currentMonth, 1).getDay();
   const daysInMonth = new Date(year, currentMonth + 1, 0).getDate();
@@ -694,7 +690,7 @@ function renderCalendar() {
         classes.push("today");
       }
 
-      // Check of er een event is op deze datum
+      // Event-dag markeren
       if (notesData[dateStr]) {
         classes.push("event-day");
         const note = notesData[dateStr].toLowerCase();
@@ -726,12 +722,6 @@ function renderCalendar() {
   calendarContent.innerHTML = html;
 }
 
-
-
-
-
-
-
 function loadBackNotes() {
   backNotes.innerHTML = "";
   let foundNotes = false;
@@ -757,26 +747,12 @@ function loadBackNotes() {
       if (colorMatch) {
         const kleur = colorMatch[1].toLowerCase();
         switch (kleur) {
-          case "groen":
-            dateBgColor = "rgba(0, 255, 0, 0.6)";
-            break;
-          case "rood":
-            dateBgColor = "rgba(255, 0, 0, 0.6)";
-            break;
-          case "geel":
-            dateBgColor = "rgba(255, 255, 0, 0.6)";
-            dateTextColor = "#232227";
-            break;
-          case "blauw":
-            dateBgColor = "rgba(0, 191, 255, 0.6)";
-            break;
-          case "wit":
-            dateBgColor = "rgba(255, 255, 255, 0.8)";
-            dateTextColor = "#232227";
-            break;
-          case "paars":
-            dateBgColor = "rgba(236, 4, 232, 0.6)";
-            break;
+          case "groen": dateBgColor = "rgba(0, 255, 0, 0.6)"; break;
+          case "rood": dateBgColor = "rgba(255, 0, 0, 0.6)"; break;
+          case "geel": dateBgColor = "rgba(255, 255, 0, 0.6)"; dateTextColor = "#232227"; break;
+          case "blauw": dateBgColor = "rgba(0, 191, 255, 0.6)"; break;
+          case "wit": dateBgColor = "rgba(255, 255, 255, 0.8)"; dateTextColor = "#232227"; break;
+          case "paars": dateBgColor = "rgba(236, 4, 232, 0.6)"; break;
         }
       }
 
@@ -824,7 +800,11 @@ function loadBackNotes() {
     }
 
     if (targetNote) {
-      targetNote.scrollIntoView({ behavior: "smooth", block: "end" });
+      // Safari fix: alleen de container laten scrollen
+      backNotes.scrollTo({
+        top: targetNote.offsetTop,
+        behavior: "smooth"
+      });
     }
   }, 100);
 
@@ -860,15 +840,9 @@ function updateTodayEvent() {
 
     if (rawText.includes("#groen")) bgColor = "rgba(0, 255, 0, 0.6)";
     else if (rawText.includes("#rood")) bgColor = "rgba(255, 0, 0, 0.6)";
-    else if (rawText.includes("#geel")) {
-      bgColor = "rgba(255, 255, 0, 0.6)";
-      textColor = "#232227";
-    }
+    else if (rawText.includes("#geel")) { bgColor = "rgba(255, 255, 0, 0.6)"; textColor = "#232227"; }
     else if (rawText.includes("#blauw")) bgColor = "rgba(0, 191, 255, 0.6)";
-    else if (rawText.includes("#wit")) {
-      bgColor = "rgba(255, 255, 255, 0.8)";
-      textColor = "#232227";
-    }
+    else if (rawText.includes("#wit")) { bgColor = "rgba(255, 255, 255, 0.8)"; textColor = "#232227"; }
     else if (rawText.includes("#paars")) bgColor = "rgba(236, 4, 232, 0.6)";
   }
 
@@ -876,49 +850,33 @@ function updateTodayEvent() {
     <div style="font-size: 16px; font-weight: 400;  height:26px; width:125px; border-radius: 5px; background-color:#323131; position: absolute; color: #fff;display: flex; align-items: center; padding-bottom: 2px; justify-content: center; top: 16px; left: 5px;">
       Vandaag
     </div>
-<div style="font-size: 14px; font-weight: 600; margin-top: 47px; background-color:#434141; width: 125px; height:176px;padding-top: 40px; position: relative;border-radius: 5px;z-index: -1; text-align:center; left:5px;
+    <div style="font-size: 14px; font-weight: 600; margin-top: 47px; background-color:#434141; width: 125px; height:176px;padding-top: 40px; position: relative;border-radius: 5px;z-index: -1; text-align:center; left:5px;
  color: ${notesData[dateStr]?.toLowerCase().includes('#wit') ? '#232227' : '#fff'};">
-    ${eventText}
- 
-
-  <div style="width: 80px; height: 10px; background-color: ${bgColor}; border-radius: 50%; position: absolute; left: 20px; bottom: 10px;"></div> </div>
-`;
- // todayEventDiv.style.backgroundColor = bgColor;
- // todayEventDiv.style.color = textColor;
+      ${eventText}
+      <div style="width: 80px; height: 10px; background-color: ${bgColor}; border-radius: 50%; position: absolute; left: 20px; bottom: 10px;"></div>
+    </div>
+  `;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   renderCalendar();
   updateTodayEvent();
+
+  // Initiele dag/maand tekst
+  const today = new Date();
+  const dayNames = ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"];
+  const monthNames = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
+  document.getElementById("day").textContent = dayNames[today.getDay()];
+  document.getElementById("date").textContent = today.getDate();
+  document.getElementById("month").textContent = `${monthNames[today.getMonth()]} ${today.getFullYear()}`;
 });
-</script>
 
-
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const today = new Date();
-    const dayNames = ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"];
-    const monthNames = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
-
-    document.getElementById("day").textContent = dayNames[today.getDay()];
-    document.getElementById("date").textContent = today.getDate();
-document.getElementById("month").textContent = `${monthNames[today.getMonth()]} ${today.getFullYear()}`;
-
-  });
-
-  const card = document.querySelector('.card');
-card.addEventListener('click', function() {
-  // Voeg een korte vertraging toe om het animatie-effect te forceren
-  setTimeout(function() {
-    card.classList.toggle('flipped');
-  }, 10);
-});
 </script>
 
 </section>
 </body>
 </html>
+
 
 
 
