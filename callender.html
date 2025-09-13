@@ -21,14 +21,14 @@
 
  .container {
   width: 600px;
-  max-width: calc(95vw - 5px);
+  max-width: calc(100vw - 8px);
   perspective: 1000px;
      -webkit-perspective: 1000px;
   perspective-origin: center;
   -webkit-perspective-origin: center; 
   position: relative;
 height:356px;
-   max-height: calc(100vh - 5px);
+   max-height: calc(100vh - 8px);
 margin: 0 auto;
 margin-top:35px;
     box-sizing: border-box;
@@ -620,8 +620,8 @@ const backNotes = document.getElementById('backNotes');
 const monthLabel = document.getElementById('monthLabel');
 
 const months = [
-  "Januari", "Februari", "Maart", "April", "Mei", "Juni",
-  "Juli", "Augustus", "September", "Oktober", "November", "December"
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
 ];
 const weekdays = ["M", "D", "W", "D", "V", "Z", "Z"];
 let currentMonth = new Date().getMonth();
@@ -822,7 +822,7 @@ function updateTodayEvent() {
   const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
   const todayEventDiv = document.getElementById("today-event");
 
-  let eventText = "Geen stage";
+  let eventText = "No Seminar";
   let bgColor = "#434343"; // default
   let textColor = "white";
 
@@ -844,7 +844,7 @@ function updateTodayEvent() {
 
   todayEventDiv.innerHTML = `
     <div style="font-size: 16px; font-weight: 400;  height:26px; width:125px; border-radius: 5px; background-color:#323131; position: absolute; color: #fff;display: flex; align-items: center; padding-bottom: 2px; justify-content: center; top: 16px; left: 5px;">
-      Vandaag
+      Today
     </div>
     <div style="font-size: 14px; font-weight: 600; margin-top: 47px; background-color:#434141; width: 125px; height:176px;padding-top: 40px; position: relative;border-radius: 5px;z-index: -1; text-align:center; left:5px;
  color: ${notesData[dateStr]?.toLowerCase().includes('#wit') ? '#232227' : '#fff'};">
@@ -860,8 +860,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Initiele dag/maand tekst
   const today = new Date();
-  const dayNames = ["Zondag", "Maandag", "Dinsdag", "Woensdag", "Donderdag", "Vrijdag", "Zaterdag"];
-  const monthNames = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli", "Augustus", "September", "Oktober", "November", "December"];
+ const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
   document.getElementById("day").textContent = dayNames[today.getDay()];
   document.getElementById("date").textContent = today.getDate();
   document.getElementById("month").textContent = `${monthNames[today.getMonth()]} ${today.getFullYear()}`;
@@ -872,30 +876,6 @@ document.addEventListener("DOMContentLoaded", () => {
 </section>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
