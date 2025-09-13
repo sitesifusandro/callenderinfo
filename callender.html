@@ -166,9 +166,7 @@ td.weekend {
 
 td.today {
   border: none;
-  background-color: transparent;
-
-  color: transparent; /* verberg het dagnummer, wordt vervangen met pseudo-element */
+  color: transparent; 
 }
 td.today::before {
   content: attr(data-day);
@@ -881,6 +879,7 @@ document.addEventListener("DOMContentLoaded", () => {
 </section>
 </body>
 </html>
+
 
 
 
