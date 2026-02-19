@@ -6,27 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      min-height: 100vh;
       margin: 0;
-      color: #aaa;
+      min-height: 100vh;
       background-color: #000;
       font-family: sans-serif;
+      color: #aaa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
+    /* --- INTERNATIONAL BOX --- */
     .international {
       display: flex;
       justify-content: center;
-      position: fixed;
-      
       width: 100%;
-      z-index: 10;
+      margin-top: 20px;
     }
 
     .international a {
       position: relative;
       width: 250px;
       height: 350px;
-      line-height: 36px;
+line-height: 24px;
       text-transform: uppercase;
       font-size: 30px;
       letter-spacing: 2px;
@@ -40,7 +42,7 @@
 
     .international a::before,
     .international a::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 0;
       left: 0;
@@ -60,28 +62,20 @@
     }
 
     .international a span {
-      top: 2px;
-      left: 2px;
-      right: 2px;
-      bottom: 2px;
+      position: relative;
       background: #010101;
       color: white;
       border-radius: 25px;
-     padding: 0;
-     font-family: initial;
-position: relative; 
-display: flex; 
-flex-direction: column; 
-align-items: center; 
-justify-content: center; 
-height: 98.5%; 
-text-align: center; 
-z-index: 1;
-width:98%
-    }
-
-    .international a:hover span {
-      color: rgba(255, 255, 255, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 98.5%;
+      width: 98%;
+      text-align: center;
+      z-index: 1;
+      left: 2.5px;
+      top: 2.5px;
     }
 
     @keyframes animate {
@@ -89,29 +83,114 @@ width:98%
       50% { background-position: 300% 0; }
       100% { background-position: 0 0; }
     }
+
+    /* --- COUNTDOWN --- */
+    #countdown {
+      display: flex;
+      gap: 10px;
+      margin-top: 40px;  /* afstand onder de international div */
+      justify-content: center;
+    }
+
+    .time-box {
+      background-color: black;
+      color: #0f0;
+      border: 2px solid white;
+      padding: 8px;
+      text-align: center;
+      border-radius: 8px;
+      min-width: 80px;
+      font-weight: 600;
+    }
+
+    .time-box .label {
+      font-size: 0.8em;
+      margin-top: 5px;
+      color: #0f0;
+      display: block;
+    }
   </style>
 </head>
 <body>
 
+  <!-- INTERNATIONAL BANNER -->
   <div class="international">
     <a href="#">
-      <span><img src="logo.png" alt="" style="position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 98%; opacity: 0.2; z-index: 0; pointer-events: none;" />
-        <div style="z-index: 2; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; font-size: 26px; line-height: 34px; font-weight: bold;">Intensive<br/> 3-Day<br/> Seminar</div>
+      <span>
+        <img src="logo.png" alt="" 
+             style="position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 98%; opacity: 0.2; z-index: 0; pointer-events: none;" />
+        
+        <div style="z-index: 2; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; font-size: 26px; font-weight: bold;">
+          Intensive<br/>3-Day<br/>Seminar
+        </div>
+
         <div style="font-size: 35px; margin-top: 10px; font-weight: bold; font-style: oblique; color: white; z-index: 2;
               text-shadow: -1px -1px 0 #5d5a5a, 1px -1px 0 #797777, -1px 1px 0 black, 1px 1px 0 black;">
-        Brussels<br/></div>
-         <div style="font-size: 20px; line-height: 25px; margin-top: 10px; z-index: 2; color: white;
-              text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;">
-         <b style="font-size: 28px;">1, 2 & 3 </b><br/>May 2026
+          Brussels
         </div>
-        <div style="font-size: 18px; line-height: 20px; margin-top: 15px; z-index: 2; color: #0f0;
-              text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;">"Immerse yourself in Sifu Sandro's unique training method"</div>
+
+        <div style="font-size: 20px; margin-top: 10px; z-index: 2; color: white;
+              text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;">
+          <b style="font-size: 28px;">1, 2 & 3<br/>May 2026</b>
+        </div>
+
+        <div style="font-size: 20px; margin-top: 10px; z-index: 2; color: #05fbfb;
+              text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;">
+          <b style="position: relative; right: 50px;">Second</b><br/>
+          <b style="position: relative; left: 50px;">Edition</b>
+        </div>
+
+        <div style="font-size: 18px; margin-top: 15px; z-index: 2; color: #0f0;
+              text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;">
+          "Immerse yourself in Sifu Sandro's unique training method"
+        </div>
       </span>
     </a>
   </div>
 
+  <!-- COUNTDOWN TIMER -->
+  <div id="countdown">
+    <div class="time-box">
+      <div id="days">0</div>
+      <span class="label">Days</span>
+    </div>
+    <div class="time-box">
+      <div id="hours">0</div>
+      <span class="label">Hours</span>
+    </div>
+    <div class="time-box">
+      <div id="minutes">0</div>
+      <span class="label">Minutes</span>
+    </div>
+    <div class="time-box">
+      <div id="seconds">0</div>
+      <span class="label">Seconds</span>
+    </div>
+  </div>
+
+  <script>
+    const targetDate = new Date("2026-05-01T10:00:00").getTime();
+
+    const timer = setInterval(function () {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "<div>Countdown verlopen!</div>";
+      }
+    }, 1000);
+  </script>
+
 </body>
 </html>
-
-
-
