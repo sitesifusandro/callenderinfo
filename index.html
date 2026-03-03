@@ -1,12 +1,358 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
-  <meta charset="UTF-8">
-  <title>Kalenderdemo</title>
-  <link rel="stylesheet" href="calender_css.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+
+:root{
+  --accent:#ff3b3b;
+  --accent-soft:#ff5c5c;
+  --line:#1f1f1f;
+  --text-soft:#a0a0a0;
+}
+
+/* GEEN body styling */
+
+.container{
+  width:100%;
+  max-width:720px;
+  margin:0 auto;
+  padding:60px 30px;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+  color:white;
+
+  border:1px solid rgba(255,60,60,0.6);
+  border-radius:14px;
+
+box-shadow: 0 0 0 1px rgba(255, 0, 0, 0.29), 0 0 25px rgba(255, 0, 0, 0.73), 0 20px 60px rgba(88, 1, 1, 0.6);
+  background: linear-gradient(180deg, rgba(255, 0, 0, 0.09), rgba(47, 45, 45, 0.4));
+}
+/* ===== HEADER ===== */
+
+h1{
+  text-align:center;
+  font-size:44px;
+  font-weight:600;
+  margin:0;
+  letter-spacing:1px;
+}
+
+.subtitle{
+  text-align:center;
+  margin-top:8px;
+  font-size:35px;
+  color:var(--text-soft);
+}
+
+.location{
+  text-align:center;
+  margin-top:4px;
+  font-size:25px;
+  color:var(--accent-soft);
+  margin-bottom:50px;
+}
+
+/* ===== BUTTON ===== */
+
+.button-wrapper{
+  text-align:center;
+  margin-bottom:40px;
+}
+
+button{
+  background: linear-gradient(135deg, #ff3b3b, #b30000);
+  border:1px solid rgba(255,80,80,0.7);
+  padding:14px 36px;
+  border-radius:50px;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:1px;
+  color:white;
+  cursor:pointer;
+  transition:all 0.3s ease;
+
+  box-shadow:
+    0 0 15px rgba(255,0,0,0.4),
+    inset 0 0 8px rgba(255,255,255,0.15);
+}
+
+button:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 0 25px rgba(255,0,0,0.6),
+    0 10px 30px rgba(255,0,0,0.3);
+}
+
+button:active{
+  transform:translateY(-1px);
+}
+
+/* ===== HIDDEN ===== */
+
+.hidden-content{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(-15px);
+  transition:all 0.6s ease;
+}
+
+.container.open .hidden-content{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===== DAY ===== */
+
+.day{
+  padding:29px 6px;
+  border-top:1px solid var(--line);
+margin: 33px 85px;
+background-color: #ff000005;
+  border-radius: 8px;
+
+}
+
+.day:first-child{
+  border-top:none;
+}
+
+.day h3{
+  font-size:21px;
+  font-weight:600;
+  margin:0 0 25px 0;
+  color:var(--accent-soft);
+text-align: center;
+}
+
+.topic{
+  font-size:21px;
+  color:var(--text-soft);
+  margin-bottom:40px;
+text-align: center;
+}
+
+.schedule{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.schedule li{
+  display:flex;
+  gap:20px;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+.time{
+  min-width:120px;
+  color:var(--accent);
+  font-weight:500;
+}
+
+/* ===== EVENT INFO ===== */
+
+/* ===== EVENT INFO ===== */
+
+.event-info{
+  margin-top:60px;
+  padding-top:40px;
+  border-top:1px solid var(--line);
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:40px;
+}
+
+.event-text{
+  flex:1;
+margin-top: 50px;
+box-shadow: 0 0 0 1px rgba(255, 0, 0, 0.29), 0 0 24px rgba(255, 0, 0, 0.73), 0 20px 33px rgba(88, 1, 1, 0.6);
+  margin-left: 24px;
+  padding-left: 5px;
+  border-radius: 8px;
+}
+
+.event-map{
+  width:280px; 
+  height:auto;
+  object-fit:contain;
+  flex-shrink:0;
+opacity: 0.5;
+}
+.event-row{
+  display:flex;
+  gap:12px;
+  margin-bottom:50px;
+  font-size:14px;
+}
+
+.event-row svg{
+  width:22px;
+  height:22px;
+  color:var(--accent);
+  margin-top:20px;
+  flex-shrink:0;
+}
+
+.event-info a{
+  color:var(--accent-soft);
+  text-decoration:none;
+  transition:0.3s ease;
+}
+
+.event-info a:hover{
+  color:white;
+}
+
+/* ===== MOBILE ===== */
+
+
+@media (max-width:768px){
+
+  .event-info{
+    flex-direction:column;
+    align-items:center;
+   }
+
+  .event-map{
+    width:75%;
+    margin:40px auto 0 auto;
+   }
+  .day{
+    margin:29px 20px;
+   }
+  .container{
+    width:97%;
+   }
+
+.event-text {
+    margin-left: 0;
+    padding: 0 10px;
+   }
+h1 {
+    font-size: 40px;
+   }
+}
+
+</style>
 </head>
-<body>
-  <h1>Welkom bij mijn kalender</h1>
-  <script src="flipcalender.js"></script>
+
+<body style="background: black;">
+
+<div class="container" id="box">
+
+  <h1><span style="color:var(--accent);">3-Day</span> Seminar</h1>
+  <div class="subtitle">May 2026</div>
+  <div class="location">Brussels</div>
+
+  <div class="button-wrapper">
+    <button onclick="toggleContent()">VIEW SCHEDULE</button>
+  </div>
+
+  <div class="hidden-content">
+
+    <div class="day">
+      <h3>1 May 2026 – Friday</h3>
+      <div class="topic">Internal Pillars</div>
+      <ul class="schedule">
+        <li><span class="time">10:00 - 13:00</span> Sticking, Fundamentals</li>
+        <li><span class="time">13:00 - 14:00</span> Lunch</li>
+        <li><span class="time">14:00 - 17:00</span> How to Approach ChiSao </li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <h3>2 May 2026 – Saturday</h3>
+      <div class="topic">MagicHands</div>
+      <ul class="schedule">
+        <li><span class="time">10:00 - 13:00</span> Fundamentals</li>
+        <li><span class="time">13:00 - 14:00</span> Lunch</li>
+        <li><span class="time">14:00 - 17:00</span> Translating it to ChiSao & Fight</li>
+      </ul>
+    </div>
+
+    <div class="day">
+      <h3>3 May 2026 – Sunday</h3>
+      <div class="topic">BiuTze</div>
+      <ul class="schedule">
+        <li><span class="time">10:00 - 13:00</span> Angling & Distance</li>
+        <li><span class="time">13:00 - 14:00</span> Lunch</li>
+        <li><span class="time">14:00 - 17:00</span> Power Lines and how to Use Them</li>
+      </ul>
+    </div>
+
+<div class="event-info">
+
+  <div class="event-text">
+
+    <div class="event-row">
+      <i data-lucide="map-pin"></i>
+      <div>
+        <strong style="font-size: 20px;line-height: 3;">Address</strong><br>
+        <span style="font-size: 15px;color: gray;margin-bottom: 8px;display: block;margin-top: -8px;">WT-School Stockel</span><br>
+        Avenue Orban 227<br>
+        1150 Woluwe-Saint-Pierre
+      </div>
+    </div>
+
+    <div class="event-row">
+      <i data-lucide="hotel"></i>
+      <div>
+        <strong style="font-size: 20px;line-height: 3;">Hotel</strong><br>
+        Nearby accommodation available
+      </div>
+    </div>
+
+    <div class="event-row">
+      <i data-lucide="message-circle"></i>
+      <div>
+        <strong style="font-size: 20px;line-height: 3;">Contact</strong><br>
+        <a href="mailto:sifusandrof@gmail.com">Sifu Sandro</a><br> For more information
+      </div>
+    </div>
+
+  </div>
+
+  <img src="metromap.jpg" alt="Metro Map" class="event-map">
+
+</div>
+
+  </div>
+
+</div>
+
+<script>
+
+lucide.createIcons();
+
+function toggleContent(){
+  const box=document.getElementById("box");
+  const content=box.querySelector(".hidden-content");
+
+  if(box.classList.contains("open")){
+    content.style.maxHeight="0px";
+    box.classList.remove("open");
+  }
+else{
+    content.style.maxHeight=content.scrollHeight+"px";
+    box.classList.add("open");
+  }
+}
+
+document.querySelector(".hidden-content").addEventListener("click",function(e){
+  if(e.target.closest("a")) return;
+  toggleContent();
+});
+
+</script>
+
 </body>
 </html>
