@@ -11,9 +11,6 @@
       background-color: #000;
       font-family: sans-serif;
       color: #aaa;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
 
     /* --- INTERNATIONAL BOX --- */
@@ -28,16 +25,17 @@
       position: relative;
       width: 250px;
       height: 350px;
-line-height: 24px;
+line-height: 1;
       text-transform: uppercase;
       font-size: 30px;
       letter-spacing: 2px;
       text-decoration: none;
       border-radius: 25px;
-      margin: 20px;
+      margin: 20px 0 50px 0;
       overflow: hidden;
       display: block;
-      zoom: 1.2;
+      transform: scale(1.2);
+      transform-origin: top center;
     }
 
     .international a::before,
@@ -70,12 +68,15 @@ line-height: 24px;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 98.5%;
+      height: auto;
+      min-height: 98%;
       width: 98%;
       text-align: center;
       z-index: 1;
       left: 2.5px;
       top: 2.5px;
+      padding: 9px;
+      box-sizing: border-box;
     }
 
     @keyframes animate {
