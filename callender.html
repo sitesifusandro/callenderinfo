@@ -359,15 +359,9 @@ font-size: 14px;
   font-weight: 300;
   position: relative;
   border-radius: 5px;
-  right: 0;
-  left: -2px;
-  top: 0;
-  bottom:0;
-  display: flex;
   z-index: 2;
   height: 200px;
-  align-items: center;
-  
+    
 }
 
 
@@ -588,7 +582,7 @@ font-size: 14px;
     "2026-02-01": "🔥 2-day Masterclass Sifu Sandro :: 10h - 13h Peer #blauw",
     "2020-02-28": "🔥 2-day Masterclass Sifu Sandro :: 13h - 16h Peer #blauw",
     "2026-03-01": "🔥 2-day Masterclass Sifu Sandro :: 10h - 13h Peer #blauw",
-    "2026-04-11": "🔥 2-day Masterclass Sifu Sandro :: 13h - 16h Peer #blauw",
+    "2026-04-11": "🔥 2-day Masterclass Sifu Sandro :: 16h - 19h Peer #blauw",
     "2026-04-12": "🔥 2-day Masterclass Sifu Sandro :: 10h - 13h Peer #blauw",
 
 
@@ -833,10 +827,10 @@ function updateTodayEvent() {
   }
 
   todayEventDiv.innerHTML = `
-    <div style="font-size: 16px; font-weight: 400;  height:26px; width:125px; border-radius: 5px; background-color:#323131; position: absolute; color: #fff;display: flex; align-items: center; padding-bottom: 2px; justify-content: center; top: 16px; left: 5px;">
+    <div style="font-size: 16px; font-weight: 600;  height:26px; width:125px; border-radius: 5px; background-color:#323131; position: absolute; color: #fff; padding: 6px 0 3px 0; left: 0; right: 0; margin: 0 auto;">
       Today
     </div>
-    <div style="font-size: 14px; font-weight: 600; margin-top: 47px; background-color:#434141; width: 125px; height:176px;padding-top: 40px; position: relative;border-radius: 5px;z-index: -1; text-align:center; left:5px;
+    <div style="font-size: 14px; font-weight: 600; background-color:#434141; width: 125px; height:176px;padding-top: 40px; position: relative;border-radius: 5px;z-index: -1; text-align:center; margin:12px auto;
  color: ${notesData[dateStr]?.toLowerCase().includes('#wit') ? '#232227' : '#fff'};">
       ${eventText}
       <div style="width: 80px; height: 10px; background-color: ${bgColor}; border-radius: 50%; position: absolute; left: 20px; bottom: 10px;"></div>
