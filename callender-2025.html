@@ -1,213 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <title>Special Event</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Kings&display=swap" rel="stylesheet">
+<style>
 
-
-
-
-
-
-  <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background-color: #000;
-      font-family: sans-serif;
-      color: #aaa;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    body::-webkit-scrollbar {
-  display: none;
+.count-down-window{
+margin-top: 14px; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-radius: .375rem; background-color: rgba(0, 0, 0, 0.48); padding-bottom: 6px; padding-top: .25rem; position: relative;
 }
-
-body {
-  scrollbar-width: none;
-}
-
-    /* --- INTERNATIONAL BOX --- */
-    .international {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      margin-top: 20px;
-    }
-
-    .international a {
-      position: relative;
-      width: 290px;
-      height: 380px;
-line-height: 1;
-      text-transform: uppercase;
-      font-size: 30px;
-      letter-spacing: 2px;
-      text-decoration: none;
-      border-radius: 25px;
-      margin: 20px 0 5px 0;
-      overflow: hidden;
-      display: block;
-    }
-
-    .international a::before,
-    .international a::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, #fb0094, #00f, #0f0, #ff0, #f00, #fb0094, #00f, #0f0, #ff0, #f00);
-      background-size: 400%;
-      border-radius: 25px;
-      animation: animate 20s linear infinite;
-      transition: 0.5s;
-      opacity: 0.4;
-      z-index: 0;
-    }
-
-    .international a:hover::after {
-      opacity: 1;
-    }
-
-    .international a span {
-      position: relative;
-      background: #010101;
-      color: white;
-      border-radius: 25px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-height: auto;
-      min-height: 98%;
-      width: 98%;
-      text-align: center;
-      z-index: 1;
-      left: 3.5px;
-      top: 4.5px;
-  padding: 9px;
-  box-sizing: border-box;
-    }
-
-    @keyframes animate {
-      0% { background-position: 0 0; }
-      50% { background-position: 300% 0; }
-      100% { background-position: 0 0; }
-    }
-
-    /* --- COUNTDOWN --- */
     #countdown {
-      display: flex;
-      gap: 10px;
-      margin-top: 40px;  /* afstand onder de international div */
-      justify-content: center;
+      display: flex; font-size: 20px; position: relative; margin: 0 auto; justify-content: center; gap: 0.6rem;
+}
+    
+.time-box {
+       padding: 5px; text-align: center;  min-width: 56px; font-weight:500;font-style: italic;
     }
-
-    .time-box {
-      background-color: black;
-      color: #0f0;
-      border: 2px solid white;
-      padding: 8px;
-      text-align: center;
-      border-radius: 8px;
-      min-width: 60px;
-      font-weight: 600;
-    }
-
     .time-box .label {
-      font-size: 0.8em;
-      margin-top: 5px;
-      color: #0f0;
-      display: block;
+      font-size: 0.6em; color: #A0A0A0; filter: brightness(1.1); margin-top: 5px; display: block; font-weight: 600;
     }
-@media (max-width: 480px) {
-  .international a {
-    width: 90vw;          /* past zich aan schermbreedte aan */
-    height: auto;
-    aspect-ratio: 5 / 7;  /* behoud verhouding */
-    transform: none;      /* GEEN scale op mobiel */
-    margin: 10px 0;
-  }
-
-  .international a span {
-    padding: 15px;
-    }
-    #countdown {
-      gap: 5px;
-      transform: scale(0.9);
-      transform-origin: top center;
-    }
+#days, #minutes, #seconds {
+  color: #fff; font-size: 2.1rem; font-weight: 700; font-style: italic;background-color: #a8a3a31c; border-radius: 10px;
 }
-  </style>
+#hours  {
+ color: #fff;font-size: 2.1rem; font-weight: 700; font-style: italic;background-color: #a8a3a31c;  border-radius: 10px;
+}
+
+
+</style>
 </head>
-<body>
 
-  <!-- INTERNATIONAL BANNER -->
-  <div class="international">
-    <a href="#">
-      <span>
-        <img src="logo.png" alt="" 
-             style="position: absolute; top: 36%; left: 50%; transform: translate(-50%, -50%); width: 98%; opacity: 0.2; z-index: 0; pointer-events: none;" />
-        
-        <div style="z-index: 2; text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black; font-size: 26px; font-weight: bold;">
-          Intensive<br/>3-Day<br/>Seminar
+<body style="background: black;">
+<div style="padding:10px; width:100%; max-width:476px; margin:0 auto;">
+<div class="es3" style="margin-bottom: 20px;">
+<h1 style="text-align: center;font-size: 78px;font-weight: 700;color: white; font-family: 'Kings', serif;">
+I <span style="text-shadow: 1.5px 1.5px 0 white;margin: 0 4px 0px 4px;font-size: 78px;position: relative;color:red;">S</span>
+<span style="color:yellow;">B</span></h1>
+<div class="subtekst" style="color: white;font-size: 0.9em;text-align: center;margin-top: -83px;letter-spacing: 1px; font-style: italic;margin-bottom: -22px;">International 
+                     <span  style="color:red;text-shadow: 0.2px 0.2px white;">Seminar </span>
+                 <span style="color:yellow;">Brussels</span></div>
+</div>
+
+<h2 style="color: white;font-family: times new roman, serif;font-weight: 700;font-style: italic;text-align: center;font-size: clamp(32px, 10vw, 52px);margin-bottom: 10px;">6 7 8 November 2026 </h2>
+
+<div class="count-down-window">
+
+       <div id="countdown">
+
+        <div class="time-box">
+         <div id="days">184</div>
+          <span class="label">Days</span>
         </div>
 
-        <div style="font-size: 35px; margin-top: 10px; font-weight: bold; font-style: oblique; color: white; z-index: 2;
-              text-shadow: -1px -1px 0 #5d5a5a, 1px -1px 0 #797777, -1px 1px 0 black, 1px 1px 0 black;">
-          Brussels
+        <div class="time-box">
+         <div id="hours">0</div>
+          <span class="label">Hours</span>
         </div>
 
-        <div style="font-size: 20px; margin-top: 10px; z-index: 2; color: white;
-              text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;">
-          <b style="font-size: 28px;">1, 2 & 3<br/>May 2026</b>
+        <div class="time-box">
+         <div id="minutes">9</div>
+          <span class="label">Minutes</span>
         </div>
 
-        <div style="font-size: 20px; margin-top: 10px; z-index: 2; color: #05fbfb;
-              text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;">
-          <b style="position: relative; right: 50px;">Second</b><br/>
-          <b style="position: relative; left: 50px;">Edition</b>
+        <div class="time-box">
+         <div id="seconds">27</div>
+          <span class="label">Seconds</span>
         </div>
 
-        <div style="font-size: 18px; margin-top: 15px; z-index: 2; color: #0f0;
-              text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;">
-          "Immerse yourself in Sifu Sandro's unique training method"
-        </div>
-      </span>
-    </a>
-  </div>
+       </div>
+      </div>
 
-  <!-- COUNTDOWN TIMER -->
-  <div id="countdown">
-    <div class="time-box">
-      <div id="days">0</div>
-      <span class="label">Days</span>
-    </div>
-    <div class="time-box">
-      <div id="hours">0</div>
-      <span class="label">Hours</span>
-    </div>
-    <div class="time-box">
-      <div id="minutes">0</div>
-      <span class="label">Minutes</span>
-    </div>
-    <div class="time-box">
-      <div id="seconds">0</div>
-      <span class="label">Seconds</span>
-    </div>
-  </div>
 
-  <script>
-    const targetDate = new Date("2026-05-01T10:00:00").getTime();
+
+
+</div>
+
+
+ <script>
+    // Einddatum instellen (bijvoorbeeld 1 januari 2026 om 00:00)
+    const targetDate = new Date("2026-11-06T09:00:00+01:00").getTime();
 
     const timer = setInterval(function () {
       const now = new Date().getTime();
@@ -218,380 +89,19 @@ height: auto;
       const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+      // Waarden updaten in de HTML
       document.getElementById("days").innerText = days;
       document.getElementById("hours").innerText = hours;
       document.getElementById("minutes").innerText = minutes;
       document.getElementById("seconds").innerText = seconds;
 
+      // Stoppen wanneer countdown klaar is
       if (distance < 0) {
         clearInterval(timer);
-        document.getElementById("countdown").innerHTML = "<div>Countdown verlopen!</div>";
+        document.getElementById("countdown").innerHTML = "<div>You missed the start… maybe not the ending!</div>";
       }
     }, 1000);
   </script>
-
-
-
-
-
-<style>
-
-:root{
-  --accent:#ff3b3b;
-  --accent-soft:#ff5c5c;
-  --line:#1f1f1f;
-  --text-soft:#a0a0a0;
-}
-
-/* GEEN body styling */
-
-.container{
-  width:100%;
-  max-width:720px;
-  margin:50px auto;
-  padding:60px 30px;
-  box-sizing:border-box;
-  font-family:'Inter',sans-serif;
-  color:white;
-
-  border:1px solid rgba(255,60,60,0.6);
-  border-radius:14px;
-
-box-shadow: 0 0 0 1px rgba(255, 0, 0, 0.29), 0 0 25px rgba(255, 0, 0, 0.53), 0 20px 60px rgba(88, 1, 1, 0.6);
-  background: linear-gradient(180deg, rgba(255, 0, 0, 0.09), rgba(47, 45, 45, 0.4));
-}
-/* ===== HEADER ===== */
-
-h1{
-  text-align:center;
-  font-size:44px;
-  font-weight:600;
-  margin:0;
-  letter-spacing:1px;
-}
-
-.subtitle{
-  text-align:center;
-  margin-top:8px;
-  font-size:35px;
-  color:var(--text-soft);
-}
-
-.location{
-  text-align:center;
-  margin-top:4px;
-  font-size:25px;
-  color:var(--accent-soft);
-  margin-bottom:50px;
-}
-
-/* ===== BUTTON ===== */
-
-.button-wrapper{
-  text-align:center;
-  margin-bottom:40px;
-}
-
-button{
-  background: linear-gradient(135deg, #ff3b3b, #b30000);
-  border:1px solid rgba(255,80,80,0.7);
-  padding:14px 36px;
-  border-radius:50px;
-  font-weight:600;
-  font-size:14px;
-  letter-spacing:1px;
-  color:white;
-  cursor:pointer;
-  transition:all 0.3s ease;
-
-  box-shadow:
-    0 0 15px rgba(255,0,0,0.4),
-    inset 0 0 8px rgba(255,255,255,0.15);
-}
-
-button:hover{
-  transform:translateY(-3px);
-  box-shadow:
-    0 0 25px rgba(255,0,0,0.6),
-    0 10px 30px rgba(255,0,0,0.3);
-}
-
-button:active{
-  transform:translateY(-1px);
-}
-
-/* ===== HIDDEN ===== */
-
-.hidden-content{
-  max-height:0;
-  overflow:hidden;
-  opacity:0;
-  transform:translateY(-15px);
-  transition:all 0.6s ease;
-}
-
-.container.open .hidden-content{
-  opacity:1;
-  transform:translateY(0);
-}
-
-/* ===== DAY ===== */
-
-.day{
-  padding:29px 12px;
-margin: 33px 85px;
-background-color: #000;
-  border-radius: 15px;
-border: 1px solid #ffe4c438;
-}
-
-
-
-.day h3{
-  font-size:21px;
-  font-weight:600;
-  margin:0 0 25px 0;
-  color:var(--accent-soft);
-text-align: center;
-}
-.day h5{
-  font-size:10px;
-  font-weight:600;
-  margin:-15px 0 25px 0;
-  color:#fff;
-text-align: center;
-}
-
-.topic{
-  font-size:21px;
-  color:var(--text-soft);
-  margin-bottom:40px;
-text-align: center;
-}
-
-
-
-.schedule li{
-
-  font-size:14px;
-  margin-bottom:6px;
-}
-
-.time{
-  min-width:120px;
-  color:var(--accent);
-  font-weight:500;
-}
-
-/* ===== EVENT INFO ===== */
-
-/* ===== EVENT INFO ===== */
-
-.event-info{
-  margin-top:60px;
-  padding-top:40px;
-  border-top:1px solid var(--line);
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:40px;
-}
-
-.event-text{
-  flex:1;
-margin-top: 50px;
-box-shadow: 0 0 0 1px rgba(255, 0, 0, 0.29), 0 0 24px rgba(255, 0, 0, 0.33), 0 20px 33px rgba(88, 1, 1, 0.6);
-  margin-left: 24px;
-  padding-left: 5px;
-  border-radius: 8px;
-}
-
-.event-map{
-  width:280px; 
-  height:auto;
-  object-fit:contain;
-  flex-shrink:0;
-opacity: 0.5;
-}
-.event-row{
-  display:flex;
-  gap:12px;
-  margin-bottom:50px;
-  font-size:14px;
-}
-
-.event-row svg{
-  width:22px;
-  height:22px;
-  color:var(--accent);
-  margin-top:20px;
-  flex-shrink:0;
-}
-
-.event-info a{
-  color:var(--accent-soft);
-  text-decoration:none;
-  transition:0.3s ease;
-}
-
-.event-info a:hover{
-  color:white;
-}
-
-/* ===== MOBILE ===== */
-
-
-@media (max-width:768px){
-
-  .event-info{
-    flex-direction:column;
-    align-items:center;
-   }
-
-  .event-map{
-    width:75%;
-    margin:40px auto 0 auto;
-   }
-  .day{
-    margin:29px 20px;
-   }
-  .container{
-    width:97%;
-   }
-
-.event-text {
-    margin-left: 0;
-    padding: 0 10px;
-   }
-h1 {
-    font-size: 40px;
-   }
-}
-
-</style>
-</head>
-
-<body style="background: black;">
-
-<div class="container" id="box">
-
-  <h1><span style="color:var(--accent);">3-Day</span> Seminar</h1>
-  <div class="subtitle">May 2026</div>
-  <div class="location">Brussels</div>
-
-  <div class="button-wrapper">
-    <button onclick="toggleContent()">VIEW SCHEDULE</button>
-  </div>
-
-  <div class="hidden-content">
-<div class="day">
-<h1 style="font-family: 'Kings', serif;margin-left: 28px;">I<span style="color:var(--accent);text-shadow: 0.5px 0.5px 0 white;">S</span>B</h1>
-<h5>International <span style="color:var(--accent);">Seminar</span> Brussels</h5>
-<div class="topic">Training 10h - 13h<br>
-                 Lunch break 13h - 14h<br>
-                   Training 14h - 17h<br>
- </div>
-</div>
-    <div class="day">
-      <h3>Friday, 1 May 2026</h3>
-
-      <ul class="schedule">
-        <li>Blueprint for sticking</li>
-        <li>Introduction to the snake hand in ChiSao</li>
-        <li>Understanding the point of contact</li>
-        <li>Recognizing and applying Yin & Yang</li>
-
-      </ul>
-    </div>
-
-    <div class="day">
-      <h3>Saturday, 2 May 2026</h3>
-
-      <ul class="schedule">
-        <li>Introduction to the 4-corner system from Magic Hands</li>
-        <li>The 3 pillars: alignment & structure</li>
-        <li>Combining snake hand & 4-corner concept</li>
-     </ul>
-    </div>
-
-    <div class="day">
-      <h3>Sunday, 3 May 2026</h3>
-
-      <ul class="schedule">
-        <li>Bridging the distance</li>
-        <li>Using the BiuTze alignment </li>
-        <li>Combining with the internal engine</li>
-        <li>Movement energy</li>
-      </ul>
-    </div>
-
-<div class="event-info">
-
-  <div class="event-text">
-
-    <div class="event-row">
-      <i data-lucide="map-pin"></i>
-      <div>
-        <strong style="font-size: 20px;line-height: 3;">Address</strong><br>
-        <span style="font-size: 15px;color: gray;margin-bottom: 8px;display: block;margin-top: -8px;">WT-School Stockel</span><br>
-        Avenue Orban 227<br>
-        1150 Woluwe-Saint-Pierre
-      </div>
-    </div>
-
-    <div class="event-row">
-      <i data-lucide="hotel"></i>
-      <div>
-        <strong style="font-size: 20px;line-height: 3;">Hotel</strong><br>
-        Nearby accommodation is available
-      </div>
-    </div>
-
-    <div class="event-row">
-      <i data-lucide="message-circle"></i>
-      <div>
-        <strong style="font-size: 20px;line-height: 3;">Contact</strong><br>
-        <a href="mailto:sifusandrof@gmail.com">Sifu Sandro</a><br> For more information
-      </div>
-    </div>
-
-  </div>
-
-  <img src="metromap.jpg" alt="Metro Map" class="event-map">
-
-</div>
-
-  </div>
-
-</div>
-
-<script>
-
-lucide.createIcons();
-
-function toggleContent(){
-  const box=document.getElementById("box");
-  const content=box.querySelector(".hidden-content");
-
-  if(box.classList.contains("open")){
-    content.style.maxHeight="0px";
-    box.classList.remove("open");
-  }
-else{
-    content.style.maxHeight=content.scrollHeight+"px";
-    box.classList.add("open");
-  }
-}
-
-document.querySelector(".hidden-content").addEventListener("click",function(e){
-  if(e.target.closest("a")) return;
-  toggleContent();
-});
-
-</script>
-
-
-
 
 
 </body>
