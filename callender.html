@@ -1,917 +1,508 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <title>1 Kalender 2026</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://unpkg.com/lucide@latest"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kings&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Beau+Rivage&family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Kings&family=Ma+Shan+Zheng&family=Playwrite+NL+Guides&display=swap" rel="stylesheet">
 <style>
-    html {
-    height: 100%;
-  }
-  body {
-    margin: 0;
-    height: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    background-color: black;
-  }
 
- .container {
-  width: 600px;
-  max-width: calc(100vw - 8px);
-  perspective: 1000px;
-     -webkit-perspective: 1000px;
-  perspective-origin: center;
-  -webkit-perspective-origin: center; 
-  position: relative;
-height:356px;
-   max-height: calc(100vh - 8px);
-margin: 0 auto;
-margin-top:35px;
-    box-sizing: border-box;
+:root{
+  --accent:#ff3b3b;
+  --accent-soft:#ff5c5c;
+  --line:#1f1f1f;
+  --text-soft:#a0a0a0;
 }
 
-.card {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  -webkit-transform-style:preserve-3d;
-  transition: transform 0.9s ease;
-    transform: translateZ(0);
-  transform: rotateY(0deg); 
-  -webkit-transform: rotateY(0deg);
-    transform-origin: center center;
-    will-change: transform;
-    display: block;
-  border: 2px solid white;
-border-radius: 10px;
+/* GEEN body styling */
 
-}
+.container{
+  width:100%;
+  max-width:400px;
+min-height:600px;
+  margin:30px auto;
+  padding:6px 3px;
+  box-sizing:border-box;
+  font-family:'Inter',sans-serif;
+  color:white;
+position: relative;
+  border:1px solid rgba(255,60,60,0.6);
+  border-radius:14px;
+overflow: hidden;
+box-shadow: 0 0 0 1px rgba(107, 83, 52, 0.29), 0 0 25px rgba(134, 86, 43, 0.73), 0 20px 60px rgba(88, 46, 1, 0.6);
 
-.flipped {
-  transform: rotateY(-180deg);
-    -webkit-transform: rotateY(-180deg);
-}
-
-.front, .back {
-  top: 0;
-  left: 0;
-  border-radius: 6px;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-   -webkit-backface-visibility: hidden;
-  transform-style: preserve-3d;
-  -webkit-transform-style:preserve-3d;
-    transform-origin: center center;
-    display: block;
-}
-
-.front {
-  background-color: #000;
-  z-index: 2;
-              backface-visibility: hidden;
-          -webkit-backface-visibility: hidden;
-
-
-}
-.contentfront {
-  display: flex;
-  height: 100%;
-  width: 100%;
-  box-sizing: border-box;
-cursor: pointer;
-}
-
-.month {
-  padding: 16px;
-  box-sizing: border-box;
-  color: #ECECE7;
-  font-family: 'Montserrat', sans-serif;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex:1;
-}
-
-
-.month-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 10px;
-}
-
-.month-header h2 {
-  margin: 0;
-  font-size: 1.5rem;
-  color: #ECECE7;
-  user-select: none;
-  flex-grow: 1;
-  text-align: center;
-}
-
-.month-header button {
-  background-color: #E76642;
-  border: none;
-  padding: 6px 10px;
-  border-radius: 4px;
-  color: white;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  z-index: 11;
-}
-
-.month-header button:hover {
-  background-color: #d15435;
-}
-
-table {
-  width: 100%;
-  table-layout: fixed;
-  border-collapse: collapse;
-}
-
-th, td {
-  width: 14.2%;
-  height: 38px;
-  text-align: center;
-  font-size: 1.2rem;
-  color: #fff;
-  word-wrap: break-word;
-  overflow: hidden;
-}
-
-td {
-  position: relative;
-  padding: 0;
-}
-th {
-  color: #EFFF;
-}
-
-td.weekend {
-  background-color: #4444448c;
-}
-
-td.today {
-  border: none;
-  color: transparent; 
-}
-td.today::before {
-  content: attr(data-day);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 33px;
-  height: 32px;
-  line-height: 22px;
-  border-radius: 50%;
-background-color: transparent;
-border: 1px solid #E76642;
-color: #Efff;
-  font-size: 1.2rem;
-  z-index: 2;
-  pointer-events: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.date {
-  width: 140px;
-  height: 100%;
-  background-color: #7c7b7b;
-  border-radius: 0 6px 6px 0;
-  text-align: center;
-  box-sizing: border-box;
-}
-
-
-.datecont {
-  height: 100%;
-  position: relative;
-}
-
-#date {
-  font-size: 60px;
-  color: #FFF;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
-}
-
-#day {
-  font-size: 18px;
-  color: #000;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 400;
-  padding-top: 8px;
-}
-
-#month {
-  font-size: 14px;
-  color: #000;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
-}
-
-
-.back {
-  background-color: #FFF;
-  transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-   cursor: pointer;
-          overflow: hidden;
-            backface-visibility: hidden;
-          -webkit-backface-visibility: hidden;
-}
-
-.contentback {
-  max-height: 97%;
-  width: 98%;
-  padding: 20px;
-  background-color: #000;
-  box-sizing: border-box;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
-  position: relative;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.backcontainer {
-  flex: 1;
-  padding-right: 10px;
-  color: #FFF;
-  font-family: 'Montserrat', sans-serif;
-  height: 100%; 
-  max-height: 100%; 
-           -webkit-mask-image: -webkit-radial-gradient(white, black);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch; 
-           position: relative;
-           z-index: 2;
-}
-.legend {
-  color: #fff;
-  font-family: 'Montserrat', sans-serif;
-  text-align: center;
-  width: 100%;
-  max-width: 400px;
-  background-color: #232227;
-  border-radius: 10px;
-  padding: 25px;
-  margin-top: 3px;
-  border: 1px solid white;
-  height: 100%;
-  zoom: 1.2;
-}
-
-.legend h4 {
-  margin-bottom: 8px;
-  font-size: 1rem;
-}
-
-.legend ul {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-}
-
-.legend li {
-  display: flex;
-  align-items: center;
-  font-size: 1.35rem;
-  gap: 8px;
-}
-
-.color-box {
-  width: 16px;
-  height: 16px;
-  display: inline-block;
-  border: 1px solid #444;
-  border-radius: 3px;
-}
-.note {
-  margin-bottom: 12px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.9rem;
-}
-
-.note strong {
-  display: inline-block;
-  background-color: #E76642;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  margin-bottom: 4px;
-}
-.note span {
-  display: block;
-  margin-top: 4px;
-}
-td.event-day {
-  cursor: pointer;
-border-radius: 3px;
-}
-
-.wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 70px;
-
-}
-.day-cell {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  flex-direction: column;
-}
-#today-event {
-font-size: 14px;
-  color: #232227;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
-  position: relative;
-  border-radius: 5px;
-  z-index: 2;
-  height: 200px;
+  background: 
+    linear-gradient(180deg, rgba(255, 0, 0, 0.09), rgba(47, 45, 45, 0.4)),
+    url('poster6 7 8 november.png');
     
+  background-size: cover;       /* vult hele container */
+  background-position: center;  /* netjes centreren */
+  background-repeat: no-repeat;
+}
+
+.container > *{
+  position: relative;
+  z-index:1;
+}
+
+.container::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background: url('poster small.jpg') center/cover no-repeat;
+
+  opacity:0;
+  transition: opacity 1s ease;
+  pointer-events:none;
+
+  z-index:0;
+}
+.container.show-second-bg::after{
+  opacity:1;
+}
+
+
+/* ===== HEADER ===== */
+
+
+.subtitle{
+  text-align:center;
+  margin-top:8px;
+  font-size:35px;
+  color:var(--text-soft);
+}
+
+.location{
+  text-align:center;
+  margin-top:4px;
+  font-size:25px;
+  color:var(--accent-soft);
+  margin-bottom:50px;
+}
+
+/* ===== BUTTON ===== */
+
+.button-wrapper{
+  position: absolute;
+  bottom: 10px;   
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+}
+
+button {  display: none;
+  background: linear-gradient(135deg, #ff973b1f, #b3650021);
+  border: 2px solid rgba(246, 201, 41, 0.5);
+  padding: 14px 36px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  color: #c2ab2a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0), inset -1px 1px 22px rgba(244,186,14,0.86);
+}
+
+button:hover{
+  transform:translateY(-3px);
+  box-shadow:
+    0 0 25px rgba(246,201,41,0.6),
+    0 10px 30px rgba(246,201,41,0.3);
+}
+
+button:active{
+  transform:translateY(-1px);
+}
+.container.open .button-wrapper{
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.3s ease;
+}
+
+/* ===== HIDDEN ===== */
+
+.hidden-content{
+  max-height:0;
+  overflow:hidden;
+  opacity:0;
+  transform:translateY(-15px);
+  transition:all 0.6s ease;
+
+}
+
+.container.open .hidden-content{
+  opacity:1;
+  transform:translateY(0);
+text-shadow: 1px 1px black;
+}
+
+/* ===== DAY ===== */
+
+.day{
+  padding:20px 18px;
+margin: 10px 25px;
+background-color: #ff000005;
+  border-radius: 8px;
+
+}
+
+.day h3{
+  font-size:21px;
+  font-weight:600;
+  margin:0 0 25px 0;
+  color:#f24a4a;
+text-align: center;
+}
+
+.day h5{
+  font-size:10px;
+  font-weight:600;
+  margin:-22px 0 55px 0;
+  color:#fff;
+text-align: center;
+}
+
+.topic{
+  font-size:21px;
+  color:#fff;
+  margin-bottom:40px;
+text-align: center;
+margin-top: 85px;
+}
+
+.schedule{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.schedule li{
+  display:flex;
+  gap:20px;
+  font-size:14px;
+  margin-bottom:6px;
+}
+
+.time{
+  min-width:120px;
+  color:var(--accent);
+  font-weight:500;
+}
+
+/* ===== EVENT INFO ===== */
+
+/* ===== EVENT INFO ===== */
+
+.event-info{
+  margin-top:20px;
+  padding-top:40px;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.event-text{
+  flex:1;
+box-shadow: 0 0 0 1px rgba(255, 191, 0, 0.29), 0 0 24px rgba(255, 191, 0, 0.55), 0 20px 33px rgba(88, 1, 1, 0.6);
+  margin-left: 15px;
+  padding-left: 5px;
+  border-radius: 8px;
+padding-right: 4px;
+margin-bottom: 10px;
+}
+
+.event-map{
+  width:180px; 
+  height:auto;
+  object-fit:contain;
+  flex-shrink:0;
+opacity: 0.5;
+margin-right: 5px;
+  border-radius: 8px;
+}
+.event-row{
+  display:flex;
+  gap:12px;
+  margin-bottom:2px;
+  font-size:14px;
+}
+
+.event-row svg{
+  width:22px;
+  height:22px;
+  color:#ffce3b;
+  margin-top:20px;
+  flex-shrink:0;
+}
+
+.event-info a{
+  color:#ffce3b;
+  text-decoration:none;
+  transition:0.3s ease;
+}
+
+.event-info a:hover{
+  color:white;
+}
+
+/* ===== MOBILE ===== */
+
+
+@media (max-width:768px){
+
+  .event-info{
+    flex-direction:column;
+    align-items:center;
+   }
+
+  .event-map{
+    width:75%;
+    margin:40px auto 0 auto;
+   }
+  .day{
+    margin:29px 20px;
+   }
+  .container{
+    width:97%;
+   }
+
+.event-text {
+    margin-left: 0;
+    padding: 0 10px;
+   }
+h2 {
+    font-size: 40px;
+   }
 }
 
 
 
 
-/* Op kleinere schermen onder elkaar zetten */
-
-@media (max-width: 700px) {
-  .wrapper {
-    padding: 2px;
-  }
-
+.count-down-window{
+margin-top: 14px; width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border-radius: .375rem; background-color: rgba(0, 0, 0, 0.48); padding-bottom: 6px; padding-top: .25rem; position: relative;
 }
-
-
-@media (max-width: 600px) {
-   body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-  }
-
-
+    #countdown {
+      display: flex; font-size: 20px; position: relative; margin: 0 auto; justify-content: center; gap: 0.6rem;
 }
-
-
-
-
-
+    
+.time-box {
+       padding: 5px; text-align: center;  min-width: 56px; font-weight:500;font-style: italic;
+    }
+    .time-box .label {
+      font-size: 0.6em; color: #A0A0A0; filter: brightness(1.1); margin-top: 5px; display: block; font-weight: 600;
+    }
+#days, #minutes, #seconds {
+  color: #fff; font-size: 2.1rem; font-weight: 700; font-style: italic;background-color: #a8a3a31c; border-radius: 10px;
+}
+#hours  {
+ color: #fff;font-size: 2.1rem; font-weight: 700; font-style: italic;background-color: #a8a3a31c;  border-radius: 10px;
+}
 
 
 </style>
 </head>
-<body>
-<section class="calender">
-<div class="body">
-<div class="wrapper">
-<div class="container">
-  <div class="card" id="calendarCard">
-<div class="front" onclick="flipCard()">
-  <div class="contentfront">
-    <div class="month">
-      <div class="month-header">
-        <button onclick="event.stopPropagation(); prevMonth()">←</button>
-        <h2 id="monthLabel"></h2>
-        <button onclick="event.stopPropagation(); nextMonth()">→</button>
+
+<body style="background: black;">
+
+<div class="es3" style="margin-bottom: 20px;">
+<h1 style="text-align: center;font-size: 78px;font-weight: 700;color: white;font-family: kings;">
+I <span style="text-shadow: 1.5px 1.5px 0 white;margin: 0 4px 0px 4px;font-size: 78px;position: relative;color:red;">S</span>
+<span style="color:yellow;">B</span></h1>
+<div class="subtekst" style="color: white;font-size: 0.9em;text-align: center;margin-top: -83px;letter-spacing: 1px; font-style: italic;margin-bottom: -22px;">International 
+                     <span  style="color:red;text-shadow: 0.2px 0.2px white;">Seminar </span>
+                 <span style="color:yellow;">Brussels</span></div>
+</div>
+
+<h2 style="color: white;font-family: times new roman, serif;font-weight: 700;font-style: italic;text-align: center;font-size: 52px;margin-bottom: 10px;">6 7 8 November 2026 </h2>
+
+<div class="count-down-window">
+
+       <div id="countdown">
+
+        <div class="time-box">
+         <div id="days">184</div>
+          <span class="label">Days</span>
+        </div>
+
+        <div class="time-box">
+         <div id="hours">0</div>
+          <span class="label">Hours</span>
+        </div>
+
+        <div class="time-box">
+         <div id="minutes">9</div>
+          <span class="label">Minutes</span>
+        </div>
+
+        <div class="time-box">
+         <div id="seconds">27</div>
+          <span class="label">Seconds</span>
+        </div>
+
+       </div>
       </div>
-      <div id="calendarMonthContent"></div>
-    </div>
-
-    <div class="date">
-
-          <div class="datecont">
-        <div id="day"></div>
-        <div id="date"></div>
-        <div id="month"></div>
-        <div id="today-event"></div>
-      </div>
-    </div>
-
-<img src="pushbutton 1.png" style="height:79px; position: absolute;bottom: -27px;right: 115px;">
-  </div>
-</div>
-    <div class="back" onclick="flipCard()">
-      <div class="contentback">
-        <div class="backcontainer" id="backNotes"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-       <div class="legend">
-   <ul>
-    <li><span class="color-box" style="background-color: #00FF00A1;"></span> International Event</li>
-    <li><span class="color-box" style="background-color: #FF0000ED;"></span> Peer Belgium</li>
-    
-    <li><span class="color-box" style="background-color: rgb(236, 4, 232, 0.85);"></span> Online video training</li>
-    <li><span class="color-box" style="background-color: rgb(0, 191, 255, 1);"></span> Intensive In-Depth Seminar</li>
-
-   </ul>    </div>
-
-</div>
-</div>
-</div>
-
-<!-- 
-  Kleurcodes in notities:
-  #rood   → MagicHands stage
-  #groen  → Internationale stage
-  #geel   → Internal WingTsun
-  #blauw  → Europese event
-  #wit    → Belgische stage
-  #paars  → Online videotraining
--->
-<script id="notitiesData" type="application/json">
-  {
-
-    "2026-05-03": "🐉 Intensive 3-Day Hands-On MagicHands Seminar :: Limited places, Avenue Orban 227, 1150 Woluwe-Saint-Pierre, contact Sifu Sandro #blauw",
-    "2026-05-02": "🐉 Intensive 3-Day Hands-On MagicHands Seminar :: Limited places, Avenue Orban 227, 1150 Woluwe-Saint-Pierre, contact sifu Sandro #blauw",
-    "2026-05-01": "🐉 Intensive 3-Day Hands-On MagicHands Seminar :: Limited places, Avenue Orban 227, 1150 Woluwe-Saint-Pierre, contact sifu Sandro #blauw",
-
-    "2026-11-06": "🐉 Intensive 3-Day Hands-On MagicHands Seminar :: Limited places, Avenue Orban 227, 1150 Woluwe-Saint-Pierre, contact Sifu Sandro #blauw",
-    "2026-11-08": "🐉 Intensive 3-Day Hands-On MagicHands Seminar :: Limited places, Avenue Orban 227, 1150 Woluwe-Saint-Pierre, contact sifu Sandro #blauw",
-    "2026-11-07": "🐉 Intensive 3-Day Hands-On MagicHands Seminar :: Limited places, Avenue Orban 227, 1150 Woluwe-Saint-Pierre, contact sifu Sandro #blauw",
-
-    "2026-02-28": "🇳🇱 MagicHands Nederland Nieuwkoop :: 🇳🇱 10h - 13h sporthal De Steupel Maarten Freeke Wije 2 Nieuwkoop 2421TP #groen",
-    "2025-12-20": "🇳🇱 MagicHands Nederland Nieuwkoop :: 14h - 17h sporthal De Steupel Maarten Freeke Wije 2 Nieuwkoop 2421TP  #groen",
-    "2025-10-18": "🇳🇱 MagicHands Nieuwkoop :: 10h - 13h sporthal De Steupel Maarten Freeke Wije 2 Nieuwkoop 2421TP #groen",
- 
-    "2026-06-07": "🇫🇷 MagicHands France Paris :: 10h - 14h #groen",
-    "2026-06-06": "🇫🇷 MagicHands France Paris :: 14h - 18h #groen",
-    "2020-09-19": "🇫🇷 MagicHands France Paris :: 14h - 18h Salle multisport des diablots, place de Culcheth, 95320 Saint-Leu-la-Forêt, Île-de-France, France #groen",
-
-    "2026-03-28": "🇫🇷 MagicHands France Paris :: 14h - 18h, 25 Boulevard de Strasbourg 75010 Paris France #groen",
-    "2026-03-29": "🇫🇷 MagicHands France Paris :: 10h - 14h, 25 Boulevard de Strasbourg 75010 Paris France #groen",
-  
-    "2020-11-13": "🇪🇸 MagicHands Madrid :: 15h - 18h #groen",
-    "2020-11-14": "🇪🇸 MagicHands Madrid :: 10h - 13h #groen",
-
-    "2026-04-26": "🇪🇸 Mallorca :: #groen",
-    "2026-04-27": "🇪🇸 Mallorca :: #groen",
-    "2026-04-28": "🇪🇸 Mallorca :: #groen",
-    "2026-04-29": "🇪🇸 Mallorca :: #groen",
-
-    "2026-05-23": "🇩🇪 Hockenheim Jubilee Seminar :: #groen",
-    "2026-05-24": "🇩🇪 Hockenheim Jubilee Seminar :: #groen",
-
-
-      "2026-12-12": "WingTsun seminar Brussels (Stockel) 10h-13h :: Avenue Orban 227, 1150 Woluwe-Saint-Pierre #wit",
 
 
 
-    "2026-07-15": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2026-07-29": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2026-06-17": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2026-06-03": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2026-05-20": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2026-05-06": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2026-04-22": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2026-04-08": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2026-03-11": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2026-03-25": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2026-02-11": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2026-02-25": "🌐 Online videotraining 19h-20h :: Open to all #paars",
-    "2025-12-30": "🌐 Online videotraining 19h-20h & Small group training MagicHands 20h-22h Peer :: Open to all #paars",
 
 
-    "2026-01-04": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-07-12": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-07-19": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-07-26": "Small group training WingTsun 19h-22h Peer :: #rood",
 
-    "2020-06-07": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2020-06-11": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-06-21": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-06-28": "Small group training WingTsun 19h-22h Peer :: #rood",
-
-    "2020-05-01": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-05-10": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-05-17": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2020-05-24": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-05-31": "Small group training WingTsun 10h-13h Peer :: #rood",
-
-    "2020-04-01": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-04-04": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-04-19": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2020-04-21": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2020-04-26": "Small group training WingTsun 10h-13h Peer :: #rood",
-
-    "2026-03-01": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-03-08": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2020-03-15": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-03-22": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2020-03-29": "Small group training WingTsun 10h-13h Peer :: #rood",
-
-    "2026-02-01": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-02-08": "Small group training WingTsun 9h30-12h30 Peer :: #rood",
-    "2026-02-15": "Small group training WingTsun 10h-13h Peer :: #rood",
-    "2026-02-22": "Small group training WingTsun 10h-13h Peer :: #rood",
-
-
+<div class="container" id="box">
 
   
-    "2026-07-07": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2020-07-09": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-07-14": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-07-21": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-07-28": "Small group training MagicHands 20h-22h Peer :: #rood",
 
-    "2026-06-02": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-06-09": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-06-16": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-06-23": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-06-30": "Small group training MagicHands 20h-22h Peer :: #rood",
+  <div class="button-wrapper">
+    <button onclick="toggleContent()">Seminar Schedule</button>
+  </div>
 
-    "2026-05-05": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-05-12": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-05-19": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-05-26": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2020-05-31": "Small group training MagicHands 20h-22h Peer :: #rood",
+  <div class="hidden-content">
 
-    "2026-04-07": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-04-14": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2020-04-17": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-04-21": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2020-04-28": "Small group training MagicHands 20h-22h Peer :: #rood",
+<div class="day">
+<h3 style="font-family: kings;text-align: center;font-size: 65px;margin-top: -25px;margin-bottom: 0px;">I
+<span style="color:red;text-shadow: 0.5px 0.5px 0 white;">S</span>
+<span style="color:yellow;text-shadow: 0.5px 0.5px 0 black;">B</span></h3>
+<h5>International <span style="color:red;">Seminar</span><span style="color:yellow;"> Brussels</span></h5>
+<div class="topic">Training 10h - 13h<br>
+                 Lunch break 13h - 14h<br>
+                   Training 14h - 17h<br>
+ </div>
+</div>
 
-    "2026-03-03": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-03-10": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-03-17": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-03-24": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-03-31": "Small group training MagicHands 20h-22h Peer :: #rood",
+    <div class="day">
+      <h3>Friday, 1 May 2026</h3>
 
-    "2026-02-03": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-02-10": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-02-17": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2026-02-24": "Small group training MagicHands 20h-22h Peer :: #rood",
-    "2020-02-30": "Small group training MagicHands 20h-22h Peer :: #rood",
+      <ul class="schedule">
+        <li>Blueprint for sticking</li>
+        <li>Introduction to the snake hand in ChiSao</li>
+        <li>Understanding the point of contact</li>
+        <li>Recognizing and applying Yin & Yang</li>
 
+      </ul>
+    </div>
+    <div class="day">
+      <h3>Saturday, 2 May 2026</h3>
 
-    "2026-03-14": "🐉 Coppa Italia D' Abruzzo Wing Tsun #groen",
-    "2026-06-14": "🐉 Rome Italy international martial arts day  #groen",
-    "2026-06-13": "🐉 Rome Italy international martial arts day  #groen",
-
-    "2026-07-04": "🔥 2-day Masterclass Sifu Sandro :: 13h - 16h Peer #blauw",
-    "2026-07-05": "🔥 2-day Masterclass Sifu Sandro :: 10h - 13h Peer #blauw",
-    "2020-02-28": "🔥 2-day Masterclass Sifu Sandro :: 13h - 16h Peer #blauw",
-    "2026-03-01": "🔥 2-day Masterclass Sifu Sandro :: 10h - 13h Peer #blauw",
-    "2026-04-11": "🔥 2-day Masterclass Sifu Sandro :: 16h - 19h Peer #blauw",
-    "2026-04-12": "🔥 2-day Masterclass Sifu Sandro :: 10h - 13h Peer #blauw",
+      <ul class="schedule">
+        <li>Introduction to the 4-corner system from Magic Hands</li>
+        <li>The 3 pillars: alignment & structure</li>
+        <li>Combining snake hand & 4-corner concept</li>
+     </ul>
+    </div>
 
 
+    <div class="day">
+      <h3>Sunday, 3 May 2026</h3>
 
+      <ul class="schedule">
+        <li>Bridging the distance</li>
+        <li>Using the BiuTze alignment </li>
+        <li>Combining with the internal engine</li>
+        <li>Movement energy</li>
+      </ul>
+    </div>
 
-    "2028-12-31": "Oudjaarsavond #blauw"
-  }
+<div class="event-info">
 
-</script>
+  <div class="event-text">
 
+    <div class="event-row">
+      <i data-lucide="map-pin"></i>
+      <div>
+        <strong style="font-size: 20px;line-height: 3;">Address</strong><br>
+        <span style="font-size: 15px;color: gray;margin-bottom: 8px;display: block;margin-top: -8px;">WT-School Stockel</span><br>
+        Avenue Orban 227<br>
+        1150 Woluwe-Saint-Pierre
+      </div>
+    </div>
 
+    <div class="event-row">
+      <i data-lucide="hotel"></i>
+      <div>
+        <strong style="font-size: 20px;line-height: 3;">Hotel</strong><br>
+        Nearby accommodation available
+      </div>
+    </div>
+
+    <div class="event-row">
+      <i data-lucide="message-circle"></i>
+      <div>
+        <a href="mailto:sifusandrof@gmail.com"><strong style="font-size: 20px;line-height: 3;">Contact</strong><br>
+        Sifu Sandro</a><br> For more information
+      </div>
+    </div>
+
+  </div>
+
+  <img src="metromap.jpg" alt="Metro Map" class="event-map">
+
+</div>
+
+  </div>
+
+</div>
+ <script>
+    // Einddatum instellen (bijvoorbeeld 1 januari 2026 om 00:00)
+    const targetDate = new Date("2026-11-06T09:00:00").getTime();
+
+    const timer = setInterval(function () {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Waarden updaten in de HTML
+      document.getElementById("days").innerText = days;
+      document.getElementById("hours").innerText = hours;
+      document.getElementById("minutes").innerText = minutes;
+      document.getElementById("seconds").innerText = seconds;
+
+      // Stoppen wanneer countdown klaar is
+      if (distance < 0) {
+        clearInterval(timer);
+        document.getElementById("countdown").innerHTML = "<div>You missed the start… maybe not the ending!</div>";
+      }
+    }, 1000);
+  </script>
 
 <script>
-const notesData = JSON.parse(document.getElementById("notitiesData").textContent);
 
-const card = document.getElementById('calendarCard');
-const calendarContent = document.getElementById('calendarMonthContent');
-const backNotes = document.getElementById('backNotes');
-const monthLabel = document.getElementById('monthLabel');
 
-const months = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-const weekdays = ["M", "T", "W", "T", "F", "S", "S"];
-let currentMonth = new Date().getMonth();
-let year = new Date().getFullYear();
 
-function flipCard() {
-  card.classList.toggle("flipped");
-  if (card.classList.contains("flipped")) {
-    loadBackNotes();
+function toggleContent(){
+  const box=document.getElementById("box");
+  const content=box.querySelector(".hidden-content");
+
+  if(box.classList.contains("open")){
+    content.style.maxHeight="0px";
+    box.classList.remove("open");
+    box.classList.remove("show-second-bg");
+  }
+  else{
+    content.style.maxHeight=content.scrollHeight+"px";
+    box.classList.add("open");
+
+    setTimeout(()=>{
+      box.classList.add("show-second-bg");
+    },200);
   }
 }
 
-function prevMonth() {
-  currentMonth--;
-  if (currentMonth < 0) {
-    currentMonth = 11;
-    year--;
-  }
-  renderCalendar();
-}
-
-function nextMonth() {
-  currentMonth++;
-  if (currentMonth > 11) {
-    currentMonth = 0;
-    year++;
-  }
-  renderCalendar();
-}
-
-function renderCalendar() {
-  const firstDay = new Date(year, currentMonth, 1).getDay();
-  const daysInMonth = new Date(year, currentMonth + 1, 0).getDate();
-  monthLabel.textContent = `${months[currentMonth]} ${year}`;
-
-  let html = "<table><tr>";
-  weekdays.forEach(day => {
-    html += `<th>${day}</th>`;
-  });
-  html += "</tr><tr>";
-
-  let day = 1;
-  const startDay = firstDay === 0 ? 6 : firstDay - 1;
-
-  for (let i = 0; i < 42; i++) {
-    if (i < startDay) {
-      html += "<td></td>";
-    } else if (day <= daysInMonth) {
-      const dateStr = `${year}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-      let classes = [];
-      let dotColor = "";
-
-      if (i % 7 === 5 || i % 7 === 6) classes.push("weekend");
-
-      const today = new Date();
-      const isToday =
-        day === today.getDate() &&
-        currentMonth === today.getMonth() &&
-        year === today.getFullYear();
-
-      if (isToday) {
-        classes.push("today");
-      }
-
-      // Event-dag markeren
-      if (notesData[dateStr]) {
-        classes.push("event-day");
-        const note = notesData[dateStr].toLowerCase();
-
-        if (note.includes("#groen")) dotColor = "rgba(0, 255, 0, 1)";
-        else if (note.includes("#rood")) dotColor = "rgba(255, 0, 0, 1)";
-        else if (note.includes("#geel")) dotColor = "rgba(255, 255, 0, 1)";
-        else if (note.includes("#blauw")) dotColor = "rgba(0, 191, 255, 1)";
-        else if (note.includes("#wit")) dotColor = "rgba(255, 255, 255, 1)";
-        else if (note.includes("#paars")) dotColor = "rgba(236, 4, 232, 1)";
-      }
-
-      html += `<td class="${classes.join(' ')}" ${isToday ? `data-day="${day}"` : ""}>
-                <div style="display: flex; flex-direction: column; align-items: center;">
-                  <div class="day-cell">${day}</div>
-                  ${dotColor ? `<div style="width: 18px; height: 5px; border-radius: 50%; background-color: ${dotColor}; position: absolute; bottom: 2px;"></div>` : ""}
-                </div>
-              </td>`;
-
-      day++;
-    } else {
-      html += "<td></td>";
-    }
-
-    if ((i + 1) % 7 === 0 && i < 41) html += "</tr><tr>";
-  }
-
-  html += "</tr></table>";
-  calendarContent.innerHTML = html;
-}
-
-function loadBackNotes() {
-  backNotes.innerHTML = "";
-  let foundNotes = false;
-
-  const sortedDates = Object.keys(notesData).sort((a, b) => new Date(a) - new Date(b));
-  const today = new Date();
-  let upcomingNoteId = null;
-
-  for (const date of sortedDates) {
-    const d = new Date(date);
-    const noteMonth = d.getMonth();
-
-    if (d.getFullYear() === year && noteMonth === currentMonth) {
-      foundNotes = true;
-      const day = d.getDate();
-      const rawText = notesData[date];
-
-      const colorMatch = rawText.match(/#(groen|rood|geel|blauw|wit|paars)/i);
-      let dateBgColor = "";
-      let dateTextColor = "#fff";
-      let dateBorder = "1px solid #000";
-
-      if (colorMatch) {
-        const kleur = colorMatch[1].toLowerCase();
-        switch (kleur) {
-          case "groen": dateBgColor = "rgba(0, 255, 0, 0.6)"; break;
-          case "rood": dateBgColor = "rgba(255, 0, 0, 0.6)"; break;
-          case "geel": dateBgColor = "rgba(255, 255, 0, 0.6)"; dateTextColor = "#232227"; break;
-          case "blauw": dateBgColor = "rgba(0, 191, 255, 0.6)"; break;
-          case "wit": dateBgColor = "rgba(255, 255, 255, 0.8)"; dateTextColor = "#232227"; break;
-          case "paars": dateBgColor = "rgba(236, 4, 232, 0.6)"; break;
-        }
-      }
-
-      const noteText = rawText
-        .replace(/::/g, "")
-        .replace(/#(groen|rood|geel|blauw|wit|paars)/gi, "")
-        .trim();
-
-      const noteId = `note-${date}`;
-      if (!upcomingNoteId && d >= today) {
-        upcomingNoteId = noteId;
-      }
-
-      const dayName = d.toLocaleDateString("nl-BE", { weekday: "long" });
-
-      backNotes.innerHTML += `
-        <div class="note" id="${noteId}" style="margin-bottom: 10px;">
-          <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-            <strong style="
-              background-color: ${dateBgColor};
-              color: ${dateTextColor};
-              padding: 4px 6px;
-              border-radius: 4px;
-              display: inline-block;
-              border: ${dateBorder};
-            ">
-              ${day} ${months[noteMonth]}
-            </strong>
-            <span style="font-weight: 400; color: #FFF; line-height: 1; padding-bottom: 10px;">${dayName}</span>
-          </div>
-          <div style="margin-top: 4px;">${noteText}</div>
-        </div>`;
-    }
-  }
-
-  setTimeout(() => {
-    let targetNote = null;
-    if (upcomingNoteId) {
-      targetNote = document.getElementById(upcomingNoteId);
-    } else {
-      const notes = backNotes.querySelectorAll(".note");
-      if (notes.length > 0) {
-        targetNote = notes[notes.length - 1];
-      }
-    }
-
-    if (targetNote) {
-      // Safari fix: alleen de container laten scrollen
-      backNotes.scrollTo({
-        top: targetNote.offsetTop,
-        behavior: "smooth"
-      });
-    }
-  }, 100);
-
-  if (!foundNotes) {
-    backNotes.innerHTML = `<p><em>Nog geen notities voor ${months[currentMonth]}</em></p>`;
-  }
-}
-
-function updateTodayEvent() {
-  const today = new Date();
-  const day = today.getDate();
-  const month = today.getMonth();
-  const year = today.getFullYear();
-
-  document.getElementById("date").textContent = day;
-  document.getElementById("month").textContent = months[month];
-  document.getElementById("day").textContent = today.toLocaleDateString('nl-BE', { weekday: 'long' });
-
-  const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-  const todayEventDiv = document.getElementById("today-event");
-
-  let eventText = "No Seminar";
-  let bgColor = "#434343"; // default
-  let textColor = "white";
-
-  if (notesData[dateStr]) {
-    const rawText = notesData[dateStr];
-    const cleanedText = rawText.replace(/#(groen|rood|geel|blauw|wit|paars)/gi, "").trim();
-    const splitText = cleanedText.split("::")[0].trim();
-    if (splitText) {
-      eventText = splitText;
-    }
-
-    if (rawText.includes("#groen")) bgColor = "rgba(0, 255, 0, 0.6)";
-    else if (rawText.includes("#rood")) bgColor = "rgba(255, 0, 0, 0.6)";
-    else if (rawText.includes("#geel")) { bgColor = "rgba(255, 255, 0, 0.6)"; textColor = "#232227"; }
-    else if (rawText.includes("#blauw")) bgColor = "rgba(0, 191, 255, 0.6)";
-    else if (rawText.includes("#wit")) { bgColor = "rgba(255, 255, 255, 0.8)"; textColor = "#232227"; }
-    else if (rawText.includes("#paars")) bgColor = "rgba(236, 4, 232, 0.6)";
-  }
-
-  todayEventDiv.innerHTML = `
-    <div style="font-size: 16px; font-weight: 600;  height:26px; width:125px; border-radius: 5px; background-color:#323131; position: absolute; color: #fff; padding: 6px 0 3px 0; left: 0; right: 0; margin: 0 auto;">
-      Today
-    </div>
-    <div style="font-size: 14px; font-weight: 600; background-color:#434141; width: 125px; height:176px;padding-top: 40px; position: relative;border-radius: 5px;z-index: -1; text-align:center; margin:12px auto;
- color: ${notesData[dateStr]?.toLowerCase().includes('#wit') ? '#232227' : '#fff'};">
-      ${eventText}
-      <div style="width: 80px; height: 10px; background-color: ${bgColor}; border-radius: 50%; position: absolute; left: 20px; bottom: 10px;"></div>
-    </div>
-  `;
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderCalendar();
-  updateTodayEvent();
-
-  // Initiele dag/maand tekst
-  const today = new Date();
- const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const monthNames = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
-
-  document.getElementById("day").textContent = dayNames[today.getDay()];
-  document.getElementById("date").textContent = today.getDate();
-  document.getElementById("month").textContent = `${monthNames[today.getMonth()]} ${today.getFullYear()}`;
+document.querySelector(".hidden-content").addEventListener("click",function(e){
+  if(e.target.closest("a")) return;
+  toggleContent();
 });
+lucide.createIcons();
 
 </script>
 
-</section>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
